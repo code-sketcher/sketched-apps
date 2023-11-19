@@ -1,6 +1,6 @@
 from termcolor import colored
-from plyer import notification
 import subprocess
+
 
 class Notifier:
   def __init__(self):
@@ -9,6 +9,10 @@ class Notifier:
   def success(self, message):
     print(colored(message, 'green'))
     self.__notify('Success', message)
+
+  def warning(self, message):
+    print(colored(message, 'yellow'))
+    self.__notify('Warning', message)
 
   def error(self, message):
     print(colored(message, 'red'))

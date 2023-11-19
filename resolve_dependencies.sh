@@ -8,19 +8,21 @@ fi
 
 echo "Detected distribution $DISTRIBUTION"
 
-# Function to check if a command is available
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
+read -p "This will install the following dependencies python, pip, python-env and libnotify. Do you want to continue? (yes/no): " answer
 
+if [ "$answer" != "yes" ]; then
+    echo "Script terminated. Goodbye!"
+    exit 1
+fi
 
+echo "Great! Let's install some apps..."
+sleep 3
 
-# Function to install Python and pip based on the Linux distribution
 install() {
   case $DISTRIBUTION in
     Debian|Ubuntu)
       sudo apt update
-      sudo apt install -y python3-full python3-venv python3-pip libnotify-bin
+      sudo apt install -y python3 python3-venv python3-pip libnotify-bin
       ;;
 
     Arch)
@@ -28,7 +30,7 @@ install() {
       ;;
 
     Fedora)
-      sudo dnf install -y python3-full python3-venv python3-pip libnotify
+      sudo dnf install -y python3 python3-venv python3-pip libnotify
       ;;
 
     *)
@@ -38,28 +40,6 @@ install() {
   esac
 }
 
-# Check if Python is installed
-if ! command_exists python3; then
-  # Install Python and pip
-  install
+install
 
-  # Check if installation was successful
-  if ! command_exists python3; then
-    echo "Failed to install Python."
-    exit 1
-  fi
-fi
-
-# Check if pip is installed
-if ! command_exists pip3; then
-  echo "Installing pip..."
-  sudo apt install -y python3-pip
-fi
-
-# Check if can send-notify
-if ! command_exists notify-send; then
-  echo "Installing libnotify"
-	install
-fi
-
-echo "Python, venv and pip are installed and ready to use on ditribution: $DISTRIBUTION"
+echo "Dependencies resolved"
