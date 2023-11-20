@@ -7,5 +7,5 @@ install_dependecies:
 	~/sketched-apps-venv/bin/pip install -r requirements.txt
 
 run: install_dependecies
-	@echo "test"
+	@printf "\e[1;34mStart installing...\e[0m\n"
 	~/sketched-apps-venv/bin/python3 main.py

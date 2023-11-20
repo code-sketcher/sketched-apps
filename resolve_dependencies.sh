@@ -1,16 +1,20 @@
 #!/bin/bash
 
+BLUE='\033[34m'
+CYAN='\033[36m'
+RESET='\033[0m'
+
 # Export the distribution as an environment variable (if not already set)
 if [ -z "$DISTRIBUTION" ]; then
   DISTRO=$(lsb_release -si 2>/dev/null || cat /etc/os-release | grep '^ID=' | cut -d'=' -f2- | tr -d '"')
 	export DISTRIBUTION=${DISTRO^}
 fi
 
-echo "Detected distribution $DISTRIBUTION"
+echo -e "${CYAN}Detected distribution $DISTRIBUTION ${RESET}"
 
-read -p "This will install the following dependencies python, pip, python-env and libnotify. Do you want to continue? (yes/no): " answer
+read -p "$(echo -e "${BLUE}This will install the following dependencies python, pip, python-env, and libnotify.${RESET}\nDo you want to continue? (y/n): ")" answer
 
-if [ "$answer" != "yes" ]; then
+if [ "$answer" != "y" ]; then
     echo "Script terminated. Goodbye!"
     exit 1
 fi
@@ -42,4 +46,4 @@ install() {
 
 install
 
-echo "Dependencies resolved"
+echo -e "${CYAN}Dependencies resolved${RESET}"
