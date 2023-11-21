@@ -62,7 +62,7 @@ class AbstractApp(ABC):
       return;
 
     try:
-      subprocess.run(['sudo', 'snap', 'install', self.name], check=True)
+      subprocess.run(['snap', 'install', self.name], check=True)
     except subprocess.CalledProcessError as e:
       self.notify.error(f"Failed to install {self.name}. Error: {e}")
 

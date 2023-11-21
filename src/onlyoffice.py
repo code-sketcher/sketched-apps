@@ -1,5 +1,6 @@
 import subprocess
 from src.abstract_app import AbstractApp
+from src.app import App
 
 class Onlyoffice(AbstractApp):
   def __init__(self):
@@ -39,9 +40,15 @@ class Onlyoffice(AbstractApp):
 
     move_key_command = 'sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg'
     subprocess.run(move_key_command, check=True, shell=True)
-    
+
     add_repo_command = 'echo \'deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main\' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list'
     subprocess.run(add_repo_command, check=True, shell=True)
 
     super().install()
+    
+    dependency_fonts_crossextra_caladea = App('fonts-crosextra-caladea', is_dependency=True)
+    dependency_fonts_crossextra_caladea.install()
+
+    dependency_mscorefonts_installer = App('ttf-mscorefonts-installer', is_dependency=True)
+    dependency_mscorefonts_installer.install()
 
