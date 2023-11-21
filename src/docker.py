@@ -31,8 +31,8 @@ class Docker(AbstractApp):
       return;
   
     if self.distribution_name == 'Debian':
-      docker = App('docker.io')
-      docker.install
+      docker = App('docker.io', 'docker')
+      docker.install()
       return
   
     dependency_app = App('curl', is_dependency=True)

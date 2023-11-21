@@ -23,10 +23,8 @@ class AbstractApp(ABC):
     self.already_installed = False
 
     self.notify = Notifier()
-    distribution = Distribution()
-    self.distribution_name = distribution.get_name()
-   
-    self.__set_apt_manager()
+    self.distribution = Distribution()
+    self.distribution_name = self.distribution.get_name()
 
   @abstractmethod
   def install(self):
@@ -76,12 +74,15 @@ class AbstractApp(ABC):
       return;
 
     try:
-      subprocess.run(['sudo', self.apt_manager, 'update'], check=True)
-      subprocess.run(['sudo', self.apt_manager, 'install', '-y', self.name], check=True)
+      apt_manager = self.__get_apt_manager()
+      subprocess.run(['sudo', apt_manager, 'update'], check=True)
+      subprocess.run(['sudo', apt_manager, 'install', '-y', self.name], check=True)
     except subprocess.CalledProcessError as e:
       self.notify.error(f"Failed to install {self.name}. Error: {e}")
 
-  def __set_apt_manager(self):
-    self.apt_manager = 'apt'
+  def __get_apt_manager(self):
+    apt_manager = 'apt'
     if  shutil.which('nala'):
-      self.apt_manager = 'nala'
+      apt_manager = 'nala'
+    
+    return apt_manager
