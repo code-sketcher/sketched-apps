@@ -1,21 +1,19 @@
 import subprocess
-from src.distribution import Distribution
-from src.app_manager import AppManager
-from src.notifier import Notifier
+from src.abstract_app import AbstractApp
+from src.app import App
 
-class VSCode:
+class VSCode(AbstractApp):
   def __init__(self):
-    self.notify = Notifier()
-
-    distribution = Distribution()
-    self.distribution_name = distribution.get_name()
-    
-    self.app = AppManager()
+    super().__init__('code')
 
   def install(self):
-    if self.app.is_installed('code'):
+    if self.is_installed():
+      self.notify.print_info(f"{self.name} is already installed.")
+      ## if it is a dependency I don't want to add it as already installed app
+      self.already_installed = not self.is_dependency
+      
       return
-
+    
     try:
       self.__install_apt()
     except subprocess.CalledProcessError as e:
@@ -25,8 +23,11 @@ class VSCode:
     if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
       return
     
-    if not self.app.install_by_approval('curl', 'Curl is a dependency for VS Code!'):
-      return
+    if self.installation_method != 'apt':
+      return;
+
+    dependency_app = App('curl', is_dependency=True)
+    dependency_app.install()
 
     self.notify.print_info(f"Start vs code config on Debian based systems!")
 
@@ -42,6 +43,6 @@ class VSCode:
     config_repo = 'sudo sh -c \'echo "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list\''
     subprocess.run(config_repo, check=True, shell=True)
 
-    self.app.install('code')
+    super().install()
 
     subprocess.run('rm microsoft.gpg', check=True, shell=True)

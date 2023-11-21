@@ -1,19 +1,17 @@
 import subprocess
-from src.distribution import Distribution
-from src.app_manager import AppManager
-from src.notifier import Notifier
+from src.abstract_app import AbstractApp
+from src.app import App
 
-class BeekeeperStudio:
+class BeekeeperStudio(AbstractApp):
   def __init__(self):
-    self.notify = Notifier()
-
-    distribution = Distribution()
-    self.distribution_name = distribution.get_name()
-    
-    self.app = AppManager()
+    super().__init__('beekeeper-studio', "/opt/Beekeeper Studio/beekeeper-studio")
 
   def install(self):
-    if self.app.is_installed("/opt/Beekeeper Studio/beekeeper-studio"):
+    if self.is_installed():
+      self.notify.print_info(f"{self.name} is already installed.")
+      ## if it is a dependency I don't want to add it as already installed app
+      self.already_installed = not self.is_dependency
+      
       return
 
     try:
@@ -24,9 +22,12 @@ class BeekeeperStudio:
   def __install_apt(self):
     if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
       return
-   
-    if not self.app.install_by_approval('curl', 'Curl is a dependency for Beekeeper Studio!'):
-      return
+
+    if self.installation_method != 'apt':
+      return;
+  
+    dependency_app = App('curl', is_dependency=True)
+    dependency_app.install()
 
     self.notify.print_info(f"Start beekeeper config on Debian based systems!")
 
@@ -38,4 +39,4 @@ class BeekeeperStudio:
     config_repo = 'echo \'deb [signed-by=/usr/share/keyrings/beekeeper.gpg] https://deb.beekeeperstudio.io stable main\' | sudo tee /etc/apt/sources.list.d/beekeeper-studio-app.list'
     subprocess.run(config_repo, check=True, shell=True)
 
-    self.app.install('beekeeper-studio')
+    super().install()

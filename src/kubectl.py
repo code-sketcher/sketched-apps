@@ -1,29 +1,32 @@
 import subprocess
-from src.distribution import Distribution
-from src.app_manager import AppManager
-from src.notifier import Notifier
+from src.abstract_app import AbstractApp
+from src.app import App
 
-class Kubectl:
+class Kubectl(AbstractApp):
   def __init__(self):
-    self.notify = Notifier()
-
-    distribution = Distribution()
-    self.distribution_name = distribution.get_name()
-    
-    self.app = AppManager()
+    super().__init__('kubectl', installation_method = 'other')
 
   def install(self):
-    if self.app.is_installed('kubectl'):
+    if self.is_installed():
+      self.notify.print_info(f"{self.name} is already installed.")
+      ## if it is a dependency I don't want to add it as already installed app
+      self.already_installed = not self.is_dependency
+      
       return
-
+    
     try:
-      self.__install_all()
+      self.__install_other()
     except subprocess.CalledProcessError as e:
       self.notify.error(f"Failed to install kubectl. Error: {e}")
-
-  def __install_all(self):
-    if not self.app.install_by_approval('curl', 'Curl is a dependency for VS Code!'):
       return
+    
+    if self.is_installed():
+      self.notify.print_success(f"Kubectl installed successfully!")
+      self.installed = True
+
+  def __install_other(self):
+    dependency_app = App('curl', is_dependency=True)
+    dependency_app.install()
 
     self.notify.print_info(f"Start kubectl installation!")
     
@@ -38,9 +41,6 @@ class Kubectl:
 
     install_command = 'sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
     subprocess.run(install_command, check=True, shell=True)
-    
-    if self.app.is_installed('kubectl'):
-      self.notify.success(f"Kubectl installed successfully!")
-      return
-    
-    self.notify.error(f"Kubectl not installed!")
+
+    subprocess.run('rm kubectl', check=True, shell=True)
+    subprocess.run('rm kubectl.sha256', check=True, shell=True)
