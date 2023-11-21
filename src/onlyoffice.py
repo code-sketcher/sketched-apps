@@ -28,7 +28,7 @@ class Onlyoffice(AbstractApp):
 
     self.notify.print_info(f"Start kubectl installation!")
     
-    keyring_command = 'gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5'
+    keyring_command = 'curl -fsSL https://download.onlyoffice.com/GPG-KEY-ONLYOFFICE | gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --import'
     subprocess.run(keyring_command, check=True, shell=True)
 
     set_permissions_command = 'chmod 644 /tmp/onlyoffice.gpg'

@@ -53,7 +53,7 @@ class AbstractApp(ABC):
 
   def __check_installation(self):
     if self.is_installed():
-      self.install = True
+      self.installed = True
       self.notify.print_success(f"{self.name} has been installed successfully.")
       return
     
