@@ -1,5 +1,6 @@
 from src.notifier import Notifier
 import sys
+import subprocess
 
 class Distribution:
   def __init__(self):
@@ -15,3 +16,9 @@ class Distribution:
     except FileNotFoundError:
       self.notify.error(f"Failed to determine distribution!")
       sys.exit(1)      
+
+  def config(self):
+    if self.get_name() == 'Debian':
+      subprocess.run('sudo apt-add-repository --component contrib', check=True, shell=True)
+      subprocess.run('sudo apt-add-repository --component non-free', check=True, shell=True)
+
