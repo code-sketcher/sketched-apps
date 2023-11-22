@@ -5,6 +5,8 @@ from src.app import App
 class Ulauncher(AbstractApp):
   def __init__(self):
     super().__init__('ulauncher')
+    
+    self.should_update = True
 
   def install(self):
     if self.is_installed():
