@@ -7,6 +7,8 @@ from src.beekeeper_studio import BeekeeperStudio
 from src.notifier import Notifier
 from src.kitty import Kitty
 from src.ulauncher import Ulauncher
+from src.brave import Brave
+from src.postman import Postman
 
 class AppList:
     def __init__(self):
@@ -83,5 +85,7 @@ class AppList:
         Docker(),
         BeekeeperStudio(),
         Kitty(),
-        Ulauncher()
+        Ulauncher(),
+        Brave(),
+        Postman()
       ]
