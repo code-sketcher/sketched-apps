@@ -1,4 +1,5 @@
 import subprocess
+import shlex
 from src.abstract_app import AbstractApp
 from src.app import App
 
@@ -32,11 +33,11 @@ class Postman(AbstractApp):
     
     create_bin_folder_command = 'mkdir -p ~/.local/bin'
     subprocess.run(create_bin_folder_command, check=True, shell=True)
+    install_command = 'tar -C /tmp/ -xzf <(curl -L https://dl.pstmn.io/download/latest/linux_64)'
+    subprocess.run(['bash', '-c', install_command], check=True)
+    subprocess.run('sudo mv /tmp/Postman /opt/postman', check=True, shell=True)
 
-    install_command = 'tar -C /tmp/ -xzf <(curl -L https://dl.pstmn.io/download/latest/linux_64) && sudo mv /tmp/postman /opt/'
-    subprocess.run(install_command, check=True, shell=True)
-
-    create_symlink_command = 'ln -sf /opt/postman/app/Postman ~/.local/bin/'
+    create_symlink_command = 'ln -sf /opt/Postman/app/Postman ~/.local/bin/postman'
     subprocess.run(create_symlink_command, check=True, shell=True)
 
     create_applications_folder_command = 'mkdir -p ~/.local/share/applications'
