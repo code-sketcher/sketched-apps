@@ -6,6 +6,8 @@ class VSCode(AbstractApp):
   def __init__(self):
     super().__init__('code')
 
+    self.should_update = True
+
   def install(self):
     if self.is_installed():
       self.notify.print_info(f"{self.name} is already installed.")

@@ -6,6 +6,8 @@ class Onlyoffice(AbstractApp):
   def __init__(self):
     super().__init__('onlyoffice-desktopeditors')
 
+    self.should_update = True
+
   def install(self):
     if self.is_installed():
       self.notify.print_info(f"{self.name} is already installed.")

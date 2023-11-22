@@ -26,6 +26,8 @@ class AbstractApp(ABC):
     self.distribution = Distribution()
     self.distribution_name = self.distribution.get_name()
 
+    self.should_update = False
+
   @abstractmethod
   def install(self):
     if self.is_installed():
@@ -75,7 +77,9 @@ class AbstractApp(ABC):
 
     try:
       apt_manager = self.__get_apt_manager()
-      subprocess.run(['sudo', apt_manager, 'update'], check=True)
+      if self.should_update:
+        subprocess.run(['sudo', apt_manager, 'update'], check=True)
+      
       subprocess.run(['sudo', apt_manager, 'install', '-y', self.name], check=True)
     except subprocess.CalledProcessError as e:
       self.notify.error(f"Failed to install {self.name}. Error: {e}")

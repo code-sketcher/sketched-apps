@@ -19,6 +19,6 @@ class Distribution:
 
   def config(self):
     if self.get_name() == 'Debian':
-      subprocess.run('sudo apt-add-repository --component contrib', check=True, shell=True)
-      subprocess.run('sudo apt-add-repository --component non-free', check=True, shell=True)
+      subprocess.run('sudo apt-add-repository --component contrib -y', check=True, shell=True)
+      subprocess.run('sudo apt-add-repository --component non-free -y', check=True, shell=True)
 

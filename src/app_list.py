@@ -6,6 +6,7 @@ from src.docker import Docker
 from src.beekeeper_studio import BeekeeperStudio
 from src.notifier import Notifier
 from src.kitty import Kitty
+from src.ulauncher import Ulauncher
 
 class AppList:
     def __init__(self):
@@ -81,5 +82,6 @@ class AppList:
         Kubectl(),
         Docker(),
         BeekeeperStudio(),
-        Kitty()
+        Kitty(),
+        Ulauncher()
       ]
