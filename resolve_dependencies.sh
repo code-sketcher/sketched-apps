@@ -54,6 +54,5 @@ config() {
 }
 
 install
-config
 
 echo -e "${CYAN}Dependencies resolved${RESET}"
