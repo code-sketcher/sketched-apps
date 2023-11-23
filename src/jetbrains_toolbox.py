@@ -1,5 +1,6 @@
 import subprocess
 import requests
+import os
 from src.abstract_app import AbstractApp
 from src.app import App
 
