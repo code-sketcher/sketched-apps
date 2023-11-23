@@ -1,4 +1,5 @@
 import subprocess
+import os
 from src.abstract_app import AbstractApp
 from src.app import App
 
@@ -8,7 +9,7 @@ class Postman(AbstractApp):
         super().__init__('postman', installation_method='other')
 
     def install(self):
-        if self.is_installed():
+        if self.__is_installed():
             self.notify.print_info(f"{self.name} is already installed.")
             ## if it is a dependency I don't want to add it as already installed app
             self.already_installed = not self.is_dependency
@@ -21,10 +22,19 @@ class Postman(AbstractApp):
             self.notify.error(f"Failed to install postman. Error: {e}")
             return
 
-        if self.is_installed():
+        if self.__is_installed():
             self.notify.print_success(f"Postman installed successfully!")
             self.installed = True
 
+    def __is_installed(self):
+        home_path = os.path.expanduser("~")
+        app_path = os.path.join(home_path, '.local/bin/postman')
+
+        if not os.path.isfile(app_path):
+            return False
+
+        return True
+    
     def __install_other(self):
         dependency_app = App('curl', is_dependency=True)
         dependency_app.install()
