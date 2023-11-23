@@ -58,5 +58,6 @@ class Docker(AbstractApp):
             shell=True
         )
 
+        subprocess.run('sudo apt update', check=True, shell=True)
         install_command = 'sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin'
         subprocess.run(install_command, check=True, shell=True)
