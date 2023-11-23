@@ -1,4 +1,5 @@
-import subprocess
+
+import requestsimport subprocess
 import requests
 import os
 from src.abstract_app import AbstractApp
@@ -28,13 +29,13 @@ class JetbrainsToolbox(AbstractApp):
 
     def __is_installed(self):
         home_path = os.path.expanduser("~")
-        path = os.path.join(path, '.local/bin/jetbrains-toolbox')
+        app_path = os.path.join(path, '.local/bin/jetbrains-toolbox')
 
-        if not os.path.isfile(path):
+        if not os.path.isfile(app_path):
             return False
 
         try:
-            subprocess.run([path, '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            subprocess.run([app_path, '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
             return True
         except subprocess.CalledProcessError:
             return False
