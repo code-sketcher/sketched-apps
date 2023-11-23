@@ -9,7 +9,7 @@ class JetbrainsToolbox(AbstractApp):
         super().__init__('jetbrains-toolbox', installation_method='other')
 
     def install(self):
-        if self.is_installed():
+        if self.__is_installed():
             self.notify.print_info(f"{self.name} is already installed.")
             self.already_installed = not self.is_dependency
 
@@ -21,10 +21,23 @@ class JetbrainsToolbox(AbstractApp):
             self.notify.error(f"Failed to install jetbrains-toolbox. Error: {e}")
             return
 
-        if self.is_installed():
+        if self.__is_installed():
             self.notify.print_success(f"jetbrains-toolbox installed successfully!")
             self.installed = True
 
+    def __is_installed(self):
+        home_path = os.path.expanduser("~")
+        path = os.path.join(path, '.local/bin/jetbrains-toolbox')
+
+        if not os.path.isfile(path):
+            return False
+
+        try:
+            subprocess.run([path, '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            return True
+        except subprocess.CalledProcessError:
+            return False
+            
     def __get_download_url(self):
         url = 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release'
         response = requests.get(url)
