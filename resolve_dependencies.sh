@@ -44,6 +44,16 @@ install() {
   esac
 }
 
+config() {
+  case $DISTRIBUTION in
+    Debian)
+      echo "PATH="/home/$USER/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"" | sudo tee /etc/environment
+      source /etc/environment
+      ;;
+  esac
+}
+
 install
+config
 
 echo -e "${CYAN}Dependencies resolved${RESET}"
