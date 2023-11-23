@@ -28,7 +28,7 @@ class JetbrainsToolbox(AbstractApp):
 
     def __is_installed(self):
         home_path = os.path.expanduser("~")
-        app_path = os.path.join(path, '.local/bin/jetbrains-toolbox')
+        app_path = os.path.join(home_path, '.local/bin/jetbrains-toolbox')
 
         if not os.path.isfile(app_path):
             return False
