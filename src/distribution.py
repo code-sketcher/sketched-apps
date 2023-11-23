@@ -26,3 +26,4 @@ class Distribution:
             env_path = '/etc/environment'
             command = f'echo "PATH="/home/$USER/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"" | sudo tee {env_path}'
             subprocess.run(command, shell=True, check=True)
+            subprocess.run(['bash', '-c', 'source /etc/environment'], check=True)
