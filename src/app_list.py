@@ -63,6 +63,7 @@ class AppList:
             App('nala'),
             App('curl'),
             App('vim'),
+            App('mc'),
             App('rsync'),
             App('libfuse2'),  # dependency for app images
             App('preload'),
