@@ -66,6 +66,7 @@ class AppList:
             App('mc'),
             App('cmake'),
             App('rsync'),
+            App('autojump'),
             App('libfuse2'),  # dependency for app images
             #App('preload'),
             App('neofetch'),
