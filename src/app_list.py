@@ -64,9 +64,10 @@ class AppList:
             App('curl'),
             App('vim'),
             App('mc'),
+            App('cmake'),
             App('rsync'),
             App('libfuse2'),  # dependency for app images
-            App('preload'),
+            #App('preload'),
             App('neofetch'),
             App('flameshot'),
             App('gpick'),
