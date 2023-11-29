@@ -38,4 +38,4 @@ class Chrome(AbstractApp):
         subprocess.run(download_command, check=True, shell=True)
 
         install_command = 'sudo apt install /tmp/google-chrome-stable_current_amd64.deb -y'
-        subprocess.run(config_install_commandrepo, check=True, shell=True)
+        subprocess.run(install_command, check=True, shell=True)
