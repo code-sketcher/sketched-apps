@@ -10,7 +10,7 @@ from src.ulauncher import Ulauncher
 from src.brave import Brave
 from src.postman import Postman
 from src.jetbrains_toolbox import JetbrainsToolbox
-
+from src.chrome import Chrome
 
 class AppList:
     def __init__(self):
@@ -63,6 +63,7 @@ class AppList:
             App('nala'),
             App('curl'),
             App('vim'),
+            App('autojump'),
             App('mc'),
             App('cmake'),
             App('rsync'),
@@ -93,5 +94,6 @@ class AppList:
             Ulauncher(),
             Brave(),
             Postman(),
-            JetbrainsToolbox()
+            JetbrainsToolbox(),
+            Chrome(),
         ]
