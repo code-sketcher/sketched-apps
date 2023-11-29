@@ -22,6 +22,10 @@ class Chrome(AbstractApp):
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install Google Chrome. Error: {e}")
 
+        if self.is_installed():
+            self.notify.print_success(f"Google Chrome installed successfully!")
+            self.installed = True
+
     def __install_apt(self):
         if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
             return
