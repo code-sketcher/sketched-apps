@@ -37,6 +37,10 @@ install() {
       sudo dnf install -y python3 python3-venv python3-pip libnotify
       ;;
 
+    OpenSUSE)
+      sudo zypper in -y python310 python310-virtualenv python310-pip libnotify
+      ;;
+
     *)
       echo "Unsupported distribution: $distribution"
       exit 1
