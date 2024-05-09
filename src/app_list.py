@@ -11,6 +11,7 @@ from src.brave import Brave
 from src.postman import Postman
 from src.jetbrains_toolbox import JetbrainsToolbox
 from src.chrome import Chrome
+from src.distribution import Distribution
 
 class AppList:
     def __init__(self):
@@ -19,6 +20,7 @@ class AppList:
         self.installed = []
         self.failed = []
         self.installed_as_dependencies = []
+        self.distribution_name = self.distribution.get_name()
 
         self.notify = Notifier()
 
