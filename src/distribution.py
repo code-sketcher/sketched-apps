@@ -13,6 +13,7 @@ class Distribution:
                 for line in os_release:
                     if line.startswith('ID='):
                         distro_id = line.split('=')[1].strip().strip('"')
+                        self.notify.info(f"Distribution:" + $distro_id)
                         return distro_id.capitalize()
         except FileNotFoundError:
             self.notify.error(f"Failed to determine distribution!")
