@@ -15,7 +15,7 @@ from src.distribution import Distribution
 
 class AppList:
     def __init__(self):
-        self.distribution_name = self.distribution.get_name()
+        self.distribution_name = Distribution().get_name()
         self.apps = self.__get_apps()
         self.already_installed = []
         self.installed = []
