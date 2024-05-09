@@ -15,12 +15,12 @@ from src.distribution import Distribution
 
 class AppList:
     def __init__(self):
+        self.distribution_name = self.distribution.get_name()
         self.apps = self.__get_apps()
         self.already_installed = []
         self.installed = []
         self.failed = []
         self.installed_as_dependencies = []
-        self.distribution_name = self.distribution.get_name()
 
         self.notify = Notifier()
 
