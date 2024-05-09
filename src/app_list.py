@@ -77,7 +77,7 @@ class AppList:
             App('autojump', installation_method='zypper'),
             App('fzf', installation_method='zypper'),
             App('fd', installation_method='zypper'), # a tool like find is used for telescope nvim also
-            App('ripgrep', installation_method='zypper'), # used for telescope nvim
+            App('ripgrep', name_to_check="rg", installation_method='zypper'), # used for telescope nvim
             App('lazygit', installation_method='zypper'), # used also for lazy nvim
             App('mc', installation_method='zypper'),
             App('flameshot', installation_method='zypper'),
@@ -86,7 +86,8 @@ class AppList:
             App('nvim', installation_method='zypper'),
             App('rsync', installation_method='zypper'),
             App('wtype', installation_method='zypper'),
-            App('rofi-wayland', installation_method='zypper'),
+            App('rofi-wayland', name_to_check="rofi", installation_method='zypper'),
+            App('pass-otp', installation_method='zypper'),
             App('kitty', installation_method='zypper'),
             App('docker', installation_method='zypper'),
             App('docker-compose', installation_method='zypper'),
