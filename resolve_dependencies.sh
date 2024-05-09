@@ -8,7 +8,7 @@ RESET='\033[0m'
 if [ -z "$DISTRIBUTION" ]; then
 	DISTRO=$(lsb_release -si 2>/dev/null || cat /etc/os-release | grep '^ID=' | cut -d'=' -f2- | tr -d '"')
 
-	if [ "${DISTRO,,}" == 'opensuse-tumbleweed' ]; then
+	if [ "$DISTRO" == 'Opensuse-tumbleweed' ]; then
 		DISTRO = 'OpenSUSE'
 	fi
 
