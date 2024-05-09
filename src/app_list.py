@@ -93,7 +93,7 @@ class AppList:
             App('libvirt', installation_method='zypper'), # dependency for qemu, note that you will need to start the daemon libvirtd
             App('qemu', installation_method='zypper'),
             App('virt-manager', installation_method='zypper'),
-            Brave(installation_method='zypper')
+            Brave(installation_method='zypper'),
             JetbrainsToolbox(),
             Kubectl(),
             Postman(),
