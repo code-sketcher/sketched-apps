@@ -4,8 +4,8 @@ from src.app import App
 
 
 class Brave(AbstractApp):
-    def __init__(self):
-        super().__init__('brave-browser')
+    def __init__(self, installation_mode='apt'):
+        super().__init__('brave-browser', installation_method=installation_mode)
 
         self.should_update = True
 
