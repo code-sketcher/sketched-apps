@@ -59,41 +59,84 @@ class AppList:
             self.notify.print_warning(' '.join(self.installed_as_dependencies))
 
     def __get_apps(self):
+        if self.distribution_name == 'Debian' or self.distribution_name == 'Ubuntu':
+            return self.__get_ubuntu_debian_apps()
+
+        if self.distribution_name == 'OpenSUSE':
+            return self.__get_opensuse_apps()
+
+        return []
+
+    def __get_opensuse_apps(self):
         return [
-            #App('nala'),
-            #App('curl'),
-            #App('vim'),
-            #App('autojump'),
-            #App('mc'),
-            #App('cmake'),
-            #App('rsync'),
-            #App('autojump'),
-            #App('libfuse2'),  # dependency for app images
-            #App('preload'),
-            #App('neofetch'),
-            #App('flameshot'),
-            #App('gpick'),
-            #App('gimp'),
-            #App('dconf-editor'),
-            #App('network-manager-openconnect-gnome', 'openconnect'),
-            #App('gnome-tweaks'),
-            #App('gnome-shell-extensions', 'gnome-extensions-app'),
-            #App('gnome-shell-extension-manager', 'extension-manager'),
-            #App('btop'),
-            #App('htop'),
-            #App('caffeine'),
-            #App('spotify', installation_method='snap'),
-            #App('notesnook', installation_method='snap'),
-            #App('discord', installation_method='snap'),
-            #Onlyoffice(),
-            #VSCode(),
+            App('opi', installation_method='zypper'),
+            App('curl', installation_method='zypper'),
+            App('fastfetch', installation_method='zypper'),
+            App('autojump', installation_method='zypper'),
+            App('fzf', installation_method='zypper'),
+            App('fd', installation_method='zypper'), # a tool like find is used for telescope nvim also
+            App('ripgrep', installation_method='zypper'), # used for telescope nvim
+            App('lazygit', installation_method='zypper'), # used also for lazy nvim
+            App('mc', installation_method='zypper'),
+            App('flameshot', installation_method='zypper'),
+            App('htop', installation_method='zypper'),
+            App('btop', installation_method='zypper'),
+            App('nvim', installation_method='zypper'),
+            App('rsync', installation_method='zypper'),
+            App('wtype', installation_method='zypper'),
+            App('rofi-wayland', installation_method='zypper'),
+            App('kitty', installation_method='zypper'),
+            App('docker', installation_method='zypper'),
+            App('docker-compose', installation_method='zypper'),
+            App('docker-compose-switch', installation_method='zypper'),
+            App('docker-buildx', installation_method='zypper'),
+            App('libvirt', installation_method='zypper'), # dependency for qemu, note that you will need to start the daemon libvirtd
+            App('qemu', installation_method='zypper'),
+            App('virt-manager', installation_method='zypper'),
+            Brave(installation_method='zypper')
+            JetbrainsToolbox(),
             Kubectl(),
-            #Docker(),
-            #BeekeeperStudio(),
-            #Kitty(),
-            #Ulauncher(),
-            #Brave(),
-            #Postman(),
-            #JetbrainsToolbox(),
-            #Chrome(),
+            Postman(),
         ]
+
+
+    def __get_ubuntu_debian_apps(self):
+        return [
+            App('nala'),
+            App('curl'),
+            App('vim'),
+            App('autojump'),
+            App('mc'),
+            App('cmake'),
+            App('rsync'),
+            App('autojump'),
+            App('libfuse2'),  # dependency for app images
+            #App('preload'),
+            App('fastfetch'),
+            App('flameshot'),
+            App('gpick'),
+            App('gimp'),
+            App('dconf-editor'),
+            App('network-manager-openconnect-gnome', 'openconnect'),
+            App('gnome-tweaks'),
+            App('gnome-shell-extensions', 'gnome-extensions-app'),
+            App('gnome-shell-extension-manager', 'extension-manager'),
+            App('btop'),
+            App('htop'),
+            App('caffeine'),
+            App('spotify', installation_method='snap'),
+            App('notesnook', installation_method='snap'),
+            App('discord', installation_method='snap'),
+            Onlyoffice(),
+            VSCode(),
+            Kubectl(),
+            Docker(),
+            BeekeeperStudio(),
+            Kitty(),
+            Ulauncher(),
+            Brave(),
+            Postman(),
+            JetbrainsToolbox(),
+            Chrome(),
+        ]
+

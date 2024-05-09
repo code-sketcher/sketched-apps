@@ -46,6 +46,7 @@ class AbstractApp(ABC):
 
         self.__install_with_apt()
         self.__install_snap()
+        self.__install_with_zypper()
         self.__check_installation()
 
     def is_installed(self):
@@ -90,3 +91,13 @@ class AbstractApp(ABC):
             apt_manager = 'nala'
 
         return apt_manager
+
+    def __install_with_zypper(self):
+        if self.installation_method != 'zypper':
+            return
+
+        try:
+            subprocess.run(['sudo', 'zypper', 'install', '-y', self.name], check=True)
+        except subprocess.CalledProcessError as e:
+            self.notify.error(f"Failed to install {self.name}. Error: {e}")
+

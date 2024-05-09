@@ -19,6 +19,7 @@ class Brave(AbstractApp):
 
         try:
             self.__install_apt()
+            self.__install_zypper()
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install brave-browser. Error: {e}")
 
@@ -39,5 +40,22 @@ class Brave(AbstractApp):
 
         config_repo = 'echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list'
         subprocess.run(config_repo, check=True, shell=True)
+
+        super().install()
+
+    def __install_zypper(self):
+        if self.distribution_name != 'OpenSUSE' or self.installation_method != 'zypper':
+            return
+
+        dependency_app = App('curl', is_dependency=True, installation_method='zypper')
+        dependency_app.install()
+
+        self.notify.print_info(f"Start brave-browser config on OpenSUSE!")
+
+        import_key_command = 'sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc'
+        subprocess.run(import_key_command, check=True, shell=True)
+
+        add_repo_command = 'sudo zypper addrepo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo'
+        subprocess.run(add_repo_command, check=True, shell=True)
 
         super().install()
