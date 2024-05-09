@@ -15,7 +15,7 @@ class Distribution:
                         distro_id = line.split('=')[1].strip().strip('"')
                         self.notify.ptin_info(f"Distribution:" + distro_id)
 
-                        if (distro_id.lower() == 'opensuse-tumbleweed')
+                        if (distro_id.lower() == 'opensuse-tumbleweed'):
                             return 'OpenSUSE'
 
                         return distro_id.capitalize()
