@@ -4,8 +4,8 @@ from src.app import App
 
 
 class VSCode(AbstractApp):
-    def __init__(self):
-        super().__init__('code')
+    def __init__(self, installation_method='apt'):
+        super().__init__('code', installation_method=installation_method)
 
         self.should_update = True
 
@@ -19,6 +19,7 @@ class VSCode(AbstractApp):
 
         try:
             self.__install_apt()
+            self.__install_zypper()
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install VS Code. Error: {e}")
 
@@ -49,3 +50,17 @@ class VSCode(AbstractApp):
         super().install()
 
         subprocess.run('rm microsoft.gpg', check=True, shell=True)
+
+    def __install_zypper(self):
+        if self.distribution_name != 'OpenSUSE' or self.installation_method != 'zypper':
+            return
+
+        self.notify.print_info(f"Start vs-code config on OpenSUSE!")
+
+        import_key_command = 'sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc'
+        subprocess.run(import_key_command, check=True, shell=True)
+
+        add_repo_command = 'sudo zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode'
+        subprocess.run(add_repo_command, check=True, shell=True)
+
+        super().install()

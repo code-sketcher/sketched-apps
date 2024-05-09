@@ -22,6 +22,11 @@ If you want those apps, you should install snap before running the scrip.
 ## Debian
 $ sudo apt update && sudo apt install -y snap
 ```
+```bash
+## OpenSUSE
+$ sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy && sudo zypper --gpg-auto-import-keys refresh && sudo zypper dup --from snappy && sudo zypper install -y snapd && sudo systemctl enable --now snapd && sudo systemctl enable --now snapd.apparmor
+```
+
 
 ## Good to know
 

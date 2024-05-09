@@ -47,9 +47,6 @@ class Brave(AbstractApp):
         if self.distribution_name != 'OpenSUSE' or self.installation_method != 'zypper':
             return
 
-        dependency_app = App('curl', is_dependency=True, installation_method='zypper')
-        dependency_app.install()
-
         self.notify.print_info(f"Start brave-browser config on OpenSUSE!")
 
         import_key_command = 'sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc'

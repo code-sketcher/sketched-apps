@@ -89,6 +89,9 @@ class AppList:
             App('rofi-wayland', name_to_check="rofi", installation_method='zypper'),
             App('pass-otp', installation_method='zypper'),
             App('kitty', installation_method='zypper'),
+            App('discord', installation_method='zypper'),
+            App('ca-certificates-steamtricks', installation_method='zypper'), # needed for steam games
+            App('steam', installation_method='zypper'),
             App('docker', installation_method='zypper'),
             App('docker-compose', installation_method='zypper'),
             App('docker-compose-switch', installation_method='zypper'),
@@ -97,9 +100,12 @@ class AppList:
             App('qemu', installation_method='zypper'),
             App('virt-manager', installation_method='zypper'),
             Brave(installation_method='zypper'),
+            VSCode(installation_method='zypper'),
             JetbrainsToolbox(),
             Kubectl(),
             Postman(),
+            App('spotify', installation_method='snap'),
+            App('notion-snap-reborn', name_to_check='notion', installation_method='snap'),
         ]
 
 
