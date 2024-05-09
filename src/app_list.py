@@ -100,6 +100,7 @@ class AppList:
             App('qemu', installation_method='zypper'),
             App('virt-manager', installation_method='zypper'),
             Brave(installation_method='zypper'),
+            Chrome('google-chrome-stable', installation_method='zypper'),
             VSCode(installation_method='zypper'),
             JetbrainsToolbox(),
             Kubectl(),
