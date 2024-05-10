@@ -80,6 +80,7 @@ class AppList:
             App('ripgrep', name_to_check="rg", installation_method='zypper'), # used for telescope nvim
             App('lazygit', installation_method='zypper'), # used also for lazy nvim
             App('mc', installation_method='zypper'),
+            App('tmux', installation_method='zypper'),
             App('flameshot', installation_method='zypper'),
             App('htop', installation_method='zypper'),
             App('btop', installation_method='zypper'),
