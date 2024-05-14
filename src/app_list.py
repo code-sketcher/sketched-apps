@@ -81,6 +81,8 @@ class AppList:
             App('lazygit', installation_method='zypper'), # used also for lazy nvim
             App('mc', installation_method='zypper'),
             App('tmux', installation_method='zypper'),
+            App('bat', installation_method='zypper'),
+            App('zoxide', installation_method='zypper'),
             App('zellij', installation_method='zypper'),
             App('zellij-bash-completion', installation_method='zypper'),
             App('flameshot', installation_method='zypper'),
