@@ -29,7 +29,7 @@ sleep 3
 
 install() {
 	case $DISTRIBUTION in
-	Debian | Ubuntu)
+	Debian | Ubuntu | Pop)
 		sudo apt update
 		sudo apt install -y python3 python3-venv python3-pip libnotify-bin
 		;;

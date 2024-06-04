@@ -67,7 +67,36 @@ class AppList:
         if self.distribution_name == 'OpenSUSE':
             return self.__get_opensuse_apps()
 
+        if self.distribution_name == 'Pop':
+            return self.__get_pop_apps()
+
         return []
+
+    def __get_pop_apps(self):
+        return [
+            App('nala'),
+            App('curl'),
+            App('make'),
+            App('cmake'),
+            App('rsync'),
+            App('fastfetch'),
+            App('fd-find'),
+            App('fzf'),
+            App('mc'),
+            App('htop'),
+            App('btop'),
+            App('rsync'),
+            App('bat'),
+            Onlyoffice(),
+            VSCode(),
+            JetbrainsToolbox(),
+            Chrome(),
+            BeekeeperStudio(),
+            Kitty(),
+            Kubectl(),
+            Docker(),
+            Brave(),
+        ]
 
     def __get_opensuse_apps(self):
         return [

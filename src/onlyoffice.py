@@ -24,7 +24,7 @@ class Onlyoffice(AbstractApp):
             self.installed = False
 
     def __install_apt(self):
-        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
+        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu' and self.distribution_name != 'Pop':
             return
 
         if self.installation_method != 'apt':

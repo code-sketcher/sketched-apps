@@ -25,7 +25,7 @@ class Docker(AbstractApp):
             self.installed = True
 
     def __install_apt(self):
-        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
+        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu' and self.distribution_name != 'Pop':
             return
 
         if self.installation_method != 'apt':
@@ -41,7 +41,7 @@ class Docker(AbstractApp):
 
         self.notify.print_info(f"Start docker config on Debian based systems!")
 
-        if self.distribution_name == 'Ubuntu':
+        if self.distribution_name == 'Ubuntu' and self.distribution_name == 'Pop':
             get_gpg_key_command = 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
 
         if self.distribution_name == 'Debian':

@@ -24,7 +24,7 @@ class VSCode(AbstractApp):
             self.notify.error(f"Failed to install VS Code. Error: {e}")
 
     def __install_apt(self):
-        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
+        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu' and self.distribution_name != 'Pop':
             return
 
         if self.installation_method != 'apt':
