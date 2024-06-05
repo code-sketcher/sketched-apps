@@ -2,7 +2,7 @@ import subprocess
 from src.abstract_app import AbstractApp
 
 
-class Ulauncher(AbstractApp):
+class Fastfetch(AbstractApp):
     def __init__(self):
         super().__init__("fastfetch")
 
