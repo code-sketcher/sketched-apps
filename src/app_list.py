@@ -12,7 +12,7 @@ from src.postman import Postman
 from src.jetbrains_toolbox import JetbrainsToolbox
 from src.chrome import Chrome
 from src.vim import Vim
-from src.vim import Nvim
+from src.nvim import Nvim
 from src.distribution import Distribution
 
 
