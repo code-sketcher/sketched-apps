@@ -48,8 +48,7 @@ class Nvim(AbstractApp):
         ninja_build_dependency = App("ninja-build", is_dependency=True)
         ninja_build_dependency.install()
 
-        gettext_dependency = App("gettext", is_dependency=True)
-        gettext_dependency.install()
+        subprocess.run(["sudo", "apt", "install", "-y", "gettext"], check=True)
 
         unzip_dependency = App("unzip", is_dependency=True)
         unzip_dependency.install()
@@ -71,7 +70,7 @@ class Nvim(AbstractApp):
             shell=True,
         )
         subprocess.run(
-            "git --git-dir=$HOME/.local/apps/source/neovim/.git checkout stable",
+            "git --git-dir=$HOME/.local/apps/source/neovim/.git checkout stable -f",
             check=True,
             shell=True,
         )
