@@ -7,11 +7,7 @@ from src.distribution import Distribution
 
 class AbstractApp(ABC):
     def __init__(
-            self,
-            name,
-            name_to_check='',
-            installation_method='apt',
-            is_dependency=False
+        self, name, name_to_check="", installation_method="apt", is_dependency=False
     ):
         self.name = name
         self.name_to_check = name_to_check
@@ -38,9 +34,9 @@ class AbstractApp(ABC):
 
             return
 
-        dependency_text = ''
+        dependency_text = ""
         if self.is_dependency:
-            dependency_text = ' as dependency'
+            dependency_text = " as dependency"
 
         self.notify.print_info(f"Start {self.name} installation{dependency_text}!")
 
@@ -58,46 +54,53 @@ class AbstractApp(ABC):
             self.notify.print_success(f"{self.name} has been installed successfully.")
             return
 
-        self.notify.error(f"Please check if {self.name} has been installed. Looks like was not!")
+        self.notify.error(
+            f"Please check if {self.name} has been installed. Looks like was not!"
+        )
 
     def __install_snap(self):
-        if self.installation_method != 'snap':
-            return;
+        if self.installation_method != "snap":
+            return
 
         try:
-            subprocess.run(['sudo', 'snap', 'install', self.name], check=True)
+            subprocess.run(["sudo", "snap", "install", self.name], check=True)
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install {self.name}. Error: {e}")
 
     def __install_with_apt(self):
-        if self.distribution_name != 'Debian' and self.distribution_name != 'Ubuntu':
+        if (
+            self.distribution_name != "Debian"
+            and self.distribution_name != "Ubuntu"
+            and self.distribution_name != "Pop"
+        ):
             return
 
-        if self.installation_method != 'apt':
+        if self.installation_method != "apt":
             return
 
         try:
             apt_manager = self.__get_apt_manager()
             if self.should_update:
-                subprocess.run(['sudo', apt_manager, 'update'], check=True)
+                subprocess.run(["sudo", apt_manager, "update"], check=True)
 
-            subprocess.run(['sudo', apt_manager, 'install', '-y', self.name], check=True)
+            subprocess.run(
+                ["sudo", apt_manager, "install", "-y", self.name], check=True
+            )
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install {self.name}. Error: {e}")
 
     def __get_apt_manager(self):
-        apt_manager = 'apt'
-        if shutil.which('nala'):
-            apt_manager = 'nala'
+        apt_manager = "apt"
+        if shutil.which("nala"):
+            apt_manager = "nala"
 
         return apt_manager
 
     def __install_with_zypper(self):
-        if self.installation_method != 'zypper':
+        if self.installation_method != "zypper":
             return
 
         try:
-            subprocess.run(['sudo', 'zypper', 'install', '-y', self.name], check=True)
+            subprocess.run(["sudo", "zypper", "install", "-y", self.name], check=True)
         except subprocess.CalledProcessError as e:
             self.notify.error(f"Failed to install {self.name}. Error: {e}")
-
