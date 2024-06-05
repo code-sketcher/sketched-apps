@@ -5,7 +5,7 @@ from src.app import App
 
 class Vim(AbstractApp):
     def __init__(self):
-        super().__init__("vim", installation_method="other")
+        super().__init__("vim")
 
     def install(self):
         if self.is_installed():

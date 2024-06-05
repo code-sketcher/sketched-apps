@@ -5,7 +5,7 @@ from src.app import App
 
 class Nvim(AbstractApp):
     def __init__(self):
-        super().__init__("nvim", installation_method="other")
+        super().__init__("nvim")
 
     def install(self):
         if self.is_installed():
