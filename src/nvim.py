@@ -70,17 +70,17 @@ class Nvim(AbstractApp):
             shell=True,
         )
         subprocess.run(
-            "git --git-dir=$HOME/.local/apps/source/neovim/.git checkout stable -f",
+            "cd $HOME/.local/apps/source/neovim && git checkout stable",
             check=True,
             shell=True,
         )
         subprocess.run(
-            "make CMAKE_BUILD_TYPE=RelWithDebInfo -C ~/.local/apps/source/neovim",
+            "make CMAKE_BUILD_TYPE=RelWithDebInfo",
             check=True,
             shell=True,
         )
         subprocess.run(
-            "cpack -B ~/.local/apps/source/neovim/build -G DEB && sudo dpkg -i ~/.local/apps/source/neovim/build/nvim-linux64.deb",
+            "cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb",
             check=True,
             shell=True,
         )
