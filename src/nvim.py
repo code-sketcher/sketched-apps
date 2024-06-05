@@ -75,12 +75,12 @@ class Nvim(AbstractApp):
             shell=True,
         )
         subprocess.run(
-            "make CMAKE_BUILD_TYPE=RelWithDebInfo",
+            "cd $HOME/.local/apps/source/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo",
             check=True,
             shell=True,
         )
         subprocess.run(
-            "cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb",
+            "cd $HOME/.local/apps/source/neovim/build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb",
             check=True,
             shell=True,
         )
