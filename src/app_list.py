@@ -12,6 +12,7 @@ from src.postman import Postman
 from src.jetbrains_toolbox import JetbrainsToolbox
 from src.chrome import Chrome
 from src.vim import Vim
+from src.fastfetch import Fastfetch
 from src.nvim import Nvim
 from src.distribution import Distribution
 
@@ -86,7 +87,6 @@ class AppList:
             App("make"),
             App("cmake"),
             App("rsync"),
-            App("fastfetch"),
             App("fd-find"),
             App("fzf"),
             App("mc"),
@@ -94,6 +94,7 @@ class AppList:
             App("btop"),
             App("rsync"),
             App("bat"),
+            Fastfetch(),
             Vim(),
             Nvim(),
             Onlyoffice(),

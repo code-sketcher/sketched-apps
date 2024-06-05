@@ -64,7 +64,11 @@ class Vim(AbstractApp):
             check=True,
             shell=True,
         )
-        subprocess.run("make -C ~/.local/apps/source/vim/src", check=True, shell=True)
         subprocess.run(
-            "sudo make install -C ~/.local/apps/source/vim/src", check=True, shell=True
+            "cd ~/.local/apps/source/vim/src && make", check=True, shell=True
+        )
+        subprocess.run(
+            "cd ~/.local/apps/source/vim/src && sudo make install",
+            check=True,
+            shell=True,
         )
