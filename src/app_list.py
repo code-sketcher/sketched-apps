@@ -88,12 +88,16 @@ class AppList:
             App("cmake"),
             App("rsync"),
             App("fd-find"),
+            App("ripgrep"),
+            App("tmux"),
             App("fzf"),
             App("mc"),
             App("htop"),
             App("btop"),
             App("rsync"),
             App("bat"),
+            App("pass-extension-otp"),
+            App("network-manager-openconnect-gnome"),
             Fastfetch(),
             Vim(),
             Nvim(),
@@ -106,6 +110,7 @@ class AppList:
             Kubectl(),
             Docker(),
             Brave(),
+            Postman(),
         ]
 
     def __get_opensuse_apps(self):
